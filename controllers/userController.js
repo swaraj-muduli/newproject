@@ -1,3 +1,5 @@
+const user = require('../models/user')
+
 let users = [
     {id:1,name:'Swaraj-muduli',email:'mail2swarajtech@gmail.com'},
     {id:2,name:'Ajit-mohapatra',email:'mohaptraajit99@gmail.com'}

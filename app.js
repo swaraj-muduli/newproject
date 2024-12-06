@@ -1,4 +1,7 @@
 const express = require('express');
+const sequelize = require('./config/db'); // Import Sequelize instance
+require('dotenv').config();       // Load .env variables
+
 const app = express();
 const userRouters = require('./routes/userRoutes')
 
@@ -9,7 +12,14 @@ app.use(express.json());//To parse json bodies
 app.use('/api/users',userRouters);
 
 //set up server
-const PORT = process.env.PORT||3000;
-app.listen(PORT,()=>{
+const PORT = process.env.PORT||4000;
+app.listen(PORT,async()=>{
     console.log(`server is running on port ${PORT}`)
+    try {
+        // Sync database models
+        await sequelize.sync();
+        console.log('Database synchronized!');
+      } catch (error) {
+        console.error('Error synchronizing the database:', error);
+      }
 });
